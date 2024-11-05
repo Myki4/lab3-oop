@@ -1,0 +1,63 @@
+#include <iostream>
+#include <string>
+#include <stdexcept>
+
+using namespace std;
+
+class Book
+{
+public:
+    string name;
+    string author;
+    int published;
+    string Publisher;
+
+    Book(const string& name, const string& author, int published, const string& Publisher)
+        : name(name), author(author), published(published), Publisher(Publisher) {}
+
+    Book operator+(int amount)
+    {
+        return Book(name, author, published, Publisher);
+    }
+
+    Book operator-(int amount)
+    {
+        return Book(name, author, published, Publisher);
+    }
+
+    bool FindBook(const string& authorName)
+    {
+        return author == authorName;
+    }
+
+    bool FindBook(const string& name, const string& authorName, int publishedYear, const string& publisherName)
+    {
+        return this->name == name && author == authorName && published == publishedYear && Publisher == publisherName;
+    }
+};
+
+int main()
+{
+    setlocale(LC_ALL, "Ukrainian");
+    try {
+        Book Book1("Пригоди Гаррi Поттера", "Джоан Роулiнг", 1997, "Блумсберi");
+        Book Book2("Майстер i Маргарита", "Мiкаель Шанкс", 1967, "Париж");
+
+        if (Book2.FindBook("Майстер i Маргарита", "Мiкаель Шанкс", 1967, "Париж"))
+        {
+            cout << "Знайдено книгу: " << Book2.name << endl;
+        }
+        else
+        {
+            cout << "Книга не знайдена." << std::endl;
+        }
+
+    }
+    catch (const exception& e)
+    {
+        cerr << "Помилка: " << e.what() << endl;
+    }
+
+    return 0;
+}
+
